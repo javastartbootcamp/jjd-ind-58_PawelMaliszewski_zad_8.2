@@ -6,10 +6,6 @@ public class Address {
     private String street;
     private String number;
 
-    public Address() {
-
-    }
-
     public Address(String placeName, String city, String street, String number) {
         this.placeName = placeName;
         this.city = city;
@@ -50,6 +46,7 @@ public class Address {
     }
 
     public String addressInfo() {
-        return ", Nazwa obiektu: " + placeName + ", Miasto: " + city + ", Ulica: " + street + " " + number;
+        return ", Nazwa obiektu: " + placeName + ", Miasto: " + city
+               + ", Ulica: " + street + " " + number;
     }
 }

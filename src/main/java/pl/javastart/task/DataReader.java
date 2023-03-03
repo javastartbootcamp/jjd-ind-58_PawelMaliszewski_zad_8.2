@@ -47,7 +47,7 @@ public class DataReader {
             if (email1.equals(email2) && email1.contains("@")) {
                 endLoop = 1;
             } else {
-                System.out.println("Adres email nie jest indentyczy, lub niepoprawny");
+                System.out.println("Adres email nie jest indentyczy, lub jest niepoprawny");
             }
         } while (endLoop == 0);
         return new TicketOnline(discount, email1);

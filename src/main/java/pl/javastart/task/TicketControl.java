@@ -16,7 +16,7 @@ public class TicketControl {
         int option;
         event.setName(dataReader.eventName());
         System.out.println("Wyprowadź Adres:");
-        dataReader.readAndCreateAddress();
+        event.addNewAddress();
         do {
             printOption();
             option = dataReader.getInt();

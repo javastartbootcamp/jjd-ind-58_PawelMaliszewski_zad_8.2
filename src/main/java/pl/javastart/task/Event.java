@@ -15,7 +15,7 @@ public class Event {
     private final TicketStandard[] ticketStandards = new TicketStandard[MAX_TICKETS];
     private int ticketNumberId = 1;
     private final boolean ticketsAvilable = ticketNumberId <= MAX_TICKETS;
-    private Address addresses =  new Address();
+    private Address address;
     private final DataReader dataReader = new DataReader();
 
     public int getOnlineTicketCount() {
@@ -39,7 +39,7 @@ public class Event {
     }
 
     public void addNewAddress() {
-        addresses = dataReader.readAndCreateAddress();
+        address = dataReader.readAndCreateAddress();
     }
 
     public void addOnlineTicket() {
@@ -93,7 +93,7 @@ public class Event {
     }
 
     public String info() {
-        return "Nazwa wydarzenia: " + name + addresses.addressInfo();
+        return "Nazwa wydarzenia: " + name + address.addressInfo();
 
     }
 }
