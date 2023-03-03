@@ -8,7 +8,6 @@ public class TicketControl {
     private static final int STANDARD_TICKETS_INFO = 4;
     private static final int ONLINE_TICKETS_INFO = 5;
     private static final int GIFT_TICKETS_INFO = 6;
-
     private final Event event = new Event();
     private final DataReader dataReader = new DataReader();
 

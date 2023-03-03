@@ -10,10 +10,9 @@ public class DataReader {
 
     private static final int NO_SIGNATURE = 0;
     private static final int WITH_SIGNATURE = 1;
-
     private final Scanner sc = new Scanner(System.in);
 
-    String eventName() {
+    public String eventName() {
         System.out.println("Wprowadź nazwę wydarzenia");
         return sc.nextLine();
     }

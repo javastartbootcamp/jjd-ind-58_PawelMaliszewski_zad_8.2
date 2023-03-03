@@ -6,6 +6,8 @@ import pl.javastart.task.ticket.TicketStandard;
 
 public class Event {
     private String name;
+
+    private Address address;
     private static final int MAX_TICKETS = 200;
     private int onlineTicketCount = 0;
     private final TicketOnline[] ticketOnline = new TicketOnline[MAX_TICKETS];
@@ -15,20 +17,8 @@ public class Event {
     private final TicketStandard[] ticketStandards = new TicketStandard[MAX_TICKETS];
     private int ticketNumberId = 1;
     private final boolean ticketsAvilable = ticketNumberId <= MAX_TICKETS;
-    private Address address;
+
     private final DataReader dataReader = new DataReader();
-
-    public int getOnlineTicketCount() {
-        return onlineTicketCount;
-    }
-
-    public int getGiftTicketCount() {
-        return giftTicketCount;
-    }
-
-    public int getStandardTicketCount() {
-        return standardTicketCount;
-    }
 
     public String getName() {
         return name;
@@ -94,6 +84,5 @@ public class Event {
 
     public String info() {
         return "Nazwa wydarzenia: " + name + address.addressInfo();
-
     }
 }
