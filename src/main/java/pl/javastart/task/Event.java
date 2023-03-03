@@ -93,7 +93,7 @@ public class Event {
     }
 
     public String info() {
-        return "Naza wydażenia: " + name + addresses.addressInfo();
+        return "Nazwa wydarzenia: " + name + addresses.addressInfo();
 
     }
 }
