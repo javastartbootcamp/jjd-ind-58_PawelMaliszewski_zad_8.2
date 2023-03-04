@@ -7,11 +7,8 @@ public class Event {
     private String name;
     private Address address;
     private static final int MAX_TICKETS = 200;
-
     private final TicketStandard[] ticketStandards = new TicketStandard[MAX_TICKETS];
     private int ticketNumberId = 0;
-    private final boolean ticketsAvailable = ticketNumberId <= MAX_TICKETS;
-
     private final DataReader dataReader = new DataReader();
 
     public String getName() {
@@ -27,27 +24,32 @@ public class Event {
     }
 
     public void addOnlineTicket() {
-        if (ticketsAvailable) {
+        if (areTicketsAvailable()) {
             ticketStandards[ticketNumberId] = dataReader.readAndCreateTicketOnline();
             ticketStandards[ticketNumberId].setTicketId(ticketNumberId + 1);
             ticketNumberId++;
+        } else {
+            noMoreTicets();
         }
     }
 
     public void addGiftTicket() {
-        if (ticketsAvailable) {
+        if (areTicketsAvailable()) {
             ticketStandards[ticketNumberId] = dataReader.readAndCreateTicketGift();
             ticketStandards[ticketNumberId].setTicketId(ticketNumberId + 1);
             ticketNumberId++;
+        } else {
+            noMoreTicets();
         }
     }
 
     public void addStandardTicket() {
-        if (ticketsAvailable) {
+        if (areTicketsAvailable()) {
             ticketStandards[ticketNumberId] = dataReader.readAndCreateTicketStandard();
             ticketStandards[ticketNumberId].setTicketId(ticketNumberId + 1);
             ticketNumberId++;
-
+        } else {
+            noMoreTicets();
         }
     }
 
@@ -85,5 +87,17 @@ public class Event {
 
     private void ticketInfo(int loopIndex) {
         System.out.println(ticketStandards[loopIndex].info());
+    }
+
+    private void noMoreTicets() {
+        System.out.println("Brak wolnych biletów");
+    }
+
+    private boolean areTicketsAvailable() {
+        if (ticketNumberId < MAX_TICKETS) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
