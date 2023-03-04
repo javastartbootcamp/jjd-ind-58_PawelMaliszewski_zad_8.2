@@ -1,22 +1,16 @@
 package pl.javastart.task;
 
-import pl.javastart.task.ticket.TicketGift;
-import pl.javastart.task.ticket.TicketOnline;
+import pl.javastart.task.ticket.FinalData;
 import pl.javastart.task.ticket.TicketStandard;
 
 public class Event {
     private String name;
-
     private Address address;
     private static final int MAX_TICKETS = 200;
-    private int onlineTicketCount = 0;
-    private final TicketOnline[] ticketOnline = new TicketOnline[MAX_TICKETS];
-    private int giftTicketCount = 0;
-    private final TicketGift[] ticketGifts = new TicketGift[MAX_TICKETS];
-    private int standardTicketCount = 0;
+
     private final TicketStandard[] ticketStandards = new TicketStandard[MAX_TICKETS];
-    private int ticketNumberId = 1;
-    private final boolean ticketsAvilable = ticketNumberId <= MAX_TICKETS;
+    private int ticketNumberId = 0;
+    private final boolean ticketsAvailable = ticketNumberId <= MAX_TICKETS;
 
     private final DataReader dataReader = new DataReader();
 
@@ -33,56 +27,63 @@ public class Event {
     }
 
     public void addOnlineTicket() {
-        if (ticketsAvilable) {
-            ticketOnline[onlineTicketCount] = dataReader.readAndCreateTicketOnline();
-            ticketOnline[onlineTicketCount].setTicketId(ticketNumberId);
-            onlineTicketCount++;
+        if (ticketsAvailable) {
+            ticketStandards[ticketNumberId] = dataReader.readAndCreateTicketOnline();
+            ticketStandards[ticketNumberId].setTicketId(ticketNumberId + 1);
             ticketNumberId++;
-
         }
     }
 
     public void addGiftTicket() {
-        if (ticketsAvilable) {
-            ticketGifts[giftTicketCount] = dataReader.readAndCreateTicketGift();
-            ticketGifts[giftTicketCount].setTicketId(ticketNumberId);
-            giftTicketCount++;
+        if (ticketsAvailable) {
+            ticketStandards[ticketNumberId] = dataReader.readAndCreateTicketGift();
+            ticketStandards[ticketNumberId].setTicketId(ticketNumberId + 1);
             ticketNumberId++;
         }
     }
 
     public void addStandardTicket() {
-        if (ticketsAvilable) {
-            ticketStandards[standardTicketCount] = dataReader.readAndCreateTicketStandard();
-            ticketStandards[standardTicketCount].setTicketId(ticketNumberId);
-            standardTicketCount++;
+        if (ticketsAvailable) {
+            ticketStandards[ticketNumberId] = dataReader.readAndCreateTicketStandard();
+            ticketStandards[ticketNumberId].setTicketId(ticketNumberId + 1);
             ticketNumberId++;
 
         }
     }
 
     public void getStadardTicketInfo() {
-        for (int i = 0; i < standardTicketCount; i++) {
-            System.out.println(info());
-            System.out.println(ticketStandards[i].info());
+        for (int i = 0; i < ticketNumberId; i++) {
+            if (ticketStandards[i].ticketName() == FinalData.STANDARD_TICKET_NAME) {
+                System.out.println(info());
+                ticketInfo(i);
+
+            }
         }
     }
 
     public void getOnlineTicketInfo() {
-        for (int i = 0; i < onlineTicketCount; i++) {
-            System.out.println(info());
-            System.out.println(ticketOnline[i].info());
+        for (int i = 0; i < ticketNumberId; i++) {
+            if (ticketStandards[i].ticketName() == FinalData.ONLINE_TICKET_NAME) {
+                System.out.println(info());
+                ticketInfo(i);
+            }
         }
     }
 
     public void getGiftTicketInfo() {
-        for (int i = 0; i < giftTicketCount; i++) {
-            System.out.println(info());
-            System.out.println(ticketGifts[i].info());
+        for (int i = 0; i < ticketNumberId; i++) {
+            if (ticketStandards[i].ticketName() == FinalData.GIFT_TICKET_NAME) {
+                System.out.println(info());
+                ticketInfo(i);
+            }
         }
     }
 
     public String info() {
         return "Nazwa wydarzenia: " + name + address.addressInfo();
+    }
+
+    private void ticketInfo(int loopIndex) {
+        System.out.println(ticketStandards[loopIndex].info());
     }
 }

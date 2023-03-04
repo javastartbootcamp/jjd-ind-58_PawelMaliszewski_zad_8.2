@@ -2,18 +2,29 @@ package pl.javastart.task.ticket;
 
 public class TicketGift extends TicketStandard {
 
-    private static final double ADD_EXTRA_PRICE_FOR_SERVICE = 1.05;
+    private boolean artistSignature;
 
-    boolean artistSingature;
-
-    public TicketGift(double discountInPercent, boolean artistSingature) {
-        super(discountInPercent);
-        this.artistSingature = artistSingature;
-        setPrice(Price.TICKET_PRICE * ADD_EXTRA_PRICE_FOR_SERVICE);
+    public TicketGift(double discount, boolean artistSignature) {
+        this.artistSignature = artistSignature;
+        setDiscount(discount);
     }
 
-    String signatureInfo() {
-        if (artistSingature) {
+    public boolean isArtistSignature() {
+        return artistSignature;
+    }
+
+    public void setArtistSignature(boolean artistSignature) {
+        this.artistSignature = artistSignature;
+    }
+
+    @Override
+    public double price() {
+        return FinalData.PRICE_PLUS_FIVE_PERCENT_FOR_SERVICE
+                - discountAmount(FinalData.PRICE_PLUS_FIVE_PERCENT_FOR_SERVICE);
+    }
+
+    private String signatureInfo() {
+        if (artistSignature) {
             return ", Bilet z podpisem artysty";
         }
         return "";
@@ -21,7 +32,7 @@ public class TicketGift extends TicketStandard {
 
     @Override
     public String ticketName() {
-        return "Prezentowy";
+        return FinalData.GIFT_TICKET_NAME;
     }
 
     public String info() {

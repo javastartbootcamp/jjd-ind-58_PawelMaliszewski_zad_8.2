@@ -18,8 +18,7 @@ public class DataReader {
     }
 
     public TicketStandard readAndCreateTicketStandard() {
-        double discount = readAndReturnDiscount();
-        return new TicketStandard(discount);
+        return new TicketStandard();
     }
 
     public Address readAndCreateAddress() {

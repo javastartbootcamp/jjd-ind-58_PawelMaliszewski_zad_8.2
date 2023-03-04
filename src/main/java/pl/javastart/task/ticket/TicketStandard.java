@@ -1,15 +1,9 @@
 package pl.javastart.task.ticket;
 
 public class TicketStandard {
-
-    private double price = Price.TICKET_PRICE;
     private double discount;
-
+    private final double price = FinalData.TICKET_PRICE;
     private int ticketId;
-
-    public TicketStandard(double discountInPercent) {
-        this.discount = discountInPercent;
-    }
 
     public int getTicketId() {
         return ticketId;
@@ -17,10 +11,6 @@ public class TicketStandard {
 
     public void setTicketId(int ticketId) {
         this.ticketId = ticketId;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public double getPrice() {
@@ -35,21 +25,19 @@ public class TicketStandard {
         this.discount = discount;
     }
 
-    private double price() {
-        return price - (price * (discount / 100));
+    public double price() {
+        return price + FinalData.PACKING_POSTAGE_COST;
     }
 
-    private String discoutInPercent() {
-        int percent =  (int) discount;
-        return percent + "%, ";
+    public double discountAmount(double priceAfterCharges) {
+        return priceAfterCharges * (getDiscount() / 100);
     }
 
     public String ticketName() {
-        return "Standardowy";
+        return FinalData.STANDARD_TICKET_NAME;
     }
 
     public String info() {
-        return "Bilet: " + ticketName() + " Cena: " + price + ", Znizka: " + discoutInPercent() + "Cena po zniżce: "
-                + price() + ", Numer biletu: " + getTicketId();
+        return "Bilet: " + ticketName() + " Cena: " + price() + ", Numer biletu: " + getTicketId();
     }
 }
