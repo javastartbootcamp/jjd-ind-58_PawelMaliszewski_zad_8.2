@@ -3,7 +3,7 @@ package pl.javastart.task;
 import java.util.Scanner;
 
 public class TicketUtils {
-    
+
     private static final Scanner sc = new Scanner(System.in);
     private static final double PACKING_COST = 5;
     private static final double FIVE_PERCENT = 0.05;
@@ -34,6 +34,7 @@ public class TicketUtils {
         double discount = 0;
         System.out.println("Podaj zniżkę");
         discount = sc.nextDouble();
+        sc.nextLine();
         return new Ticket(eventName, address, type, price, discount);
     }
 
