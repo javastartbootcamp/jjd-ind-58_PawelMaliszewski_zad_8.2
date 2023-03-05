@@ -3,8 +3,10 @@ package pl.javastart.task;
 import java.util.Scanner;
 
 public class TicketUtils {
-
+    
     private static final Scanner sc = new Scanner(System.in);
+    private static final double PACKING_COST = 5;
+    private static final double FIVE_PERCENT = 0.05;
 
     public static Ticket addTicket() {
         System.out.println("Nazwa wydarzenia:");
@@ -30,20 +32,26 @@ public class TicketUtils {
         } while (!isFromOneToThree(option));
         double price = 100;
         double discount = 0;
-        if (option != 2) {
-            System.out.println("Podaj zniżkę");
-            discount = sc.nextDouble();
-        }
+        System.out.println("Podaj zniżkę");
+        discount = sc.nextDouble();
         return new Ticket(eventName, address, type, price, discount);
     }
 
     public static double getTicketPrice(Ticket ticket) {
         return switch (ticket.getType()) {
-            case Ticket.ONLINE_NAME -> ticket.getPrice() - (ticket.getPrice() * ticket.getDiscount());
-            case Ticket.STANDARD_NAME -> ticket.getPrice() + 5;
-            case Ticket.GIFT_NAME -> (ticket.getPrice() + 5) * 1.05 - (ticket.getPrice() * ticket.getDiscount());
+            case Ticket.ONLINE_NAME -> getPriceAfterDiscount(ticket);
+            case Ticket.STANDARD_NAME -> priceAfterDiscountPlusPacking(ticket);
+            case Ticket.GIFT_NAME -> priceAfterDiscountPlusPacking(ticket) + getPriceAfterDiscount(ticket) * FIVE_PERCENT;
             default -> 0;
         };
+    }
+
+    private static double getPriceAfterDiscount(Ticket ticket) {
+        return ticket.getPrice() - ticket.getPrice() * ticket.getDiscount();
+    }
+
+    private static double priceAfterDiscountPlusPacking(Ticket ticket) {
+        return getPriceAfterDiscount(ticket) + PACKING_COST;
     }
 
     private static int getInt() {

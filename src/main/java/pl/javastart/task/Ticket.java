@@ -22,7 +22,6 @@ public class Ticket {
         this.discount = discount;
         ticketNumber = ticketId;
         ticketId++;
-
     }
 
     public int getTicketNumber() {

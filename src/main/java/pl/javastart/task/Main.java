@@ -1,6 +1,7 @@
 package pl.javastart.task;
 
 public class Main {
+
     public static void main(String[] args) {
         Ticket ticket1 = new Ticket("Koncert", "Warszawa", "Online", 100, 0);
         Ticket ticket2 = new Ticket("Koncert", "Warszawa", "Online", 100, 0.1);
@@ -11,8 +12,8 @@ public class Main {
         Ticket ticket7 = TicketUtils.addTicket();
         Ticket ticket8 = TicketUtils.addTicket();
 
-        double tiketprice = TicketUtils.getTicketPrice(ticket1);
-        System.out.println(tiketprice);
+        double ticket1Price = TicketUtils.getTicketPrice(ticket1);
+        System.out.println(ticket1Price);
 
         TicketUtils.ticketInfo(ticket1);
         TicketUtils.ticketInfo(ticket2);
